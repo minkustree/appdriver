@@ -1,1 +1,4 @@
 /server-standalone.jar
+/bin
+/gen
+/project.properties
