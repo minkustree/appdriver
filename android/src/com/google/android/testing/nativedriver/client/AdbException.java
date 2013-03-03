@@ -25,6 +25,8 @@ import org.openqa.selenium.WebDriverException;
  * @author Matt DeVore
  */
 public class AdbException extends WebDriverException {
+  private static final long serialVersionUID = -2500256001642709867L;
+
   public AdbException() {
     // nothing to do
   }

@@ -47,6 +47,7 @@ import javax.servlet.ServletException;
  * @author Matt DeVore
  */
 public class AndroidNativeDriverServlet extends DriverServlet {
+  private static final long serialVersionUID = 1L;
   protected static final String SESSION_PATH = "/session/:sessionId/";
 
   /**
