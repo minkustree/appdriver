@@ -104,8 +104,35 @@ limitations under the License.
 		  excludesfile="${server.resourcestoexclude}" />
     </zip>
   </target>
+  
+  <target name="prejarjar-libs">
+    <zip destfile="${build.dir}/libs-prejarjar.jar">
+      <zipfileset src="${third_party.guava}"
+		  excludesfile="${server.resourcestoexclude}" />
+      <zipfileset src="${third_party.selenium.server}">
+	<exclude name="${exclude_from_selenium}" />
+	<excludesfile name="${server.resourcestoexclude}" />
+      </zipfileset>
+      <zipfileset src="${third_party.jsr305}"
+		  excludesfile="${server.resourcestoexclude}" />
+      <zipfileset src="${third_party.jetty.core}"
+		  excludesfile="${server.resourcestoexclude}" />
+      <zipfileset src="${third_party.jetty.util}"
+		  excludesfile="${server.resourcestoexclude}" />
+    </zip>
+  </target>
 
-  <target name="standalone-server" depends="prejarjar-server">
+  <target name="standalone-libs" depends="prejarjar-libs">
+          <java jar="${third_party.jarjar}" fork="true">
+      <arg value="process" />
+      <arg path="${libs.jarjarrules}" />
+      <arg path="${build.dir}/libs-prejarjar.jar" />
+      <arg path="${libs.standalonejar}" />
+    </java>
+      
+  </target>  
+
+<target name="standalone-server" depends="prejarjar-server">
     <java jar="${third_party.jarjar}" fork="true">
       <arg value="process" />
       <arg path="${server.jarjarrules}" />
